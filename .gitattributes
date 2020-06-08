@@ -1,0 +1,11 @@
+build/linux/**          text eol=lf   encoding=utf-8-unix
+build/macos/**          text eol=lf   encoding=utf-8-unix
+build/mingw/**          text eol=lf   encoding=utf-8-unix
+build/msvc/**           text eol=crlf encoding=cp932-dos
+build/unix-common/**    text eol=lf   encoding=utf-8-unix
+
+license/**      text eol=crlf encoding=utf-8-dos
+src/**          text eol=crlf encoding=utf-8-with-signature-dos
+
+ChangeLog.md    text eol=crlf encoding=utf-8-dos
+README.md       text eol=crlf encoding=utf-8-dos
