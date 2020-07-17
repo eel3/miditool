@@ -51,7 +51,7 @@ inline void usage(std::ostream &out)
 
 inline void version()
 {
-    std::cout << program_name << " 1.0.0" << std::endl;
+    std::cout << program_name << " 1.0.1" << std::endl;
 }
 
 /* ---------------------------------------------------------------------- */
@@ -130,22 +130,49 @@ void wait()
 
 int main(int argc, char *argv[])
 {
+    using std::cerr;
     using std::cout;
 
     program_name = my_basename(argv[0]);
 
-    if (argc != 2) {
-        usage(std::cerr);
-        return EXIT_FAILURE;
+    for (; (argc > 1) && (argv[1][0] == '-') && (argv[1][1] != '\0'); argc--, argv++) {
+        if (argv[1][1] == '-') {
+            const char *p { &argv[1][2] };
+
+            if (*p == '\0') {
+                argc--, argv++;
+                break;
+            } else if (STREQ(p, "help")) {
+                usage(cout);
+                return EXIT_SUCCESS;
+            } else if (STREQ(p, "version")) {
+                version();
+                return EXIT_SUCCESS;
+            } else {
+                usage(cerr);
+                return EXIT_FAILURE;
+            }
+            continue;
+        }
+
+        const char *p { &argv[1][1] };
+
+        do switch (*p) {
+        case 'h':
+            usage(cout);
+            return EXIT_SUCCESS;
+        case 'v':
+            version();
+            return EXIT_SUCCESS;
+        default:
+            usage(cerr);
+            return EXIT_FAILURE;
+        } while (*++p != '\0');
     }
 
-    if (STREQ(argv[1], "-h") || STREQ(argv[1], "--help")) {
-        usage(cout);
-        return EXIT_SUCCESS;
-    }
-    if (STREQ(argv[1], "-v") || STREQ(argv[1], "--version")) {
-        version();
-        return EXIT_SUCCESS;
+    if (argc != 2) {
+        usage(cerr);
+        return EXIT_FAILURE;
     }
 
     unsigned int pn { 0 };
