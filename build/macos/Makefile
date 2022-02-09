@@ -20,7 +20,7 @@ WARNADD        :=
 SDKROOT        := $(shell xcodebuild -version -sdk macosx | sed -n '/^Path: /s///p')
 
 CPPFLAGS       += -isysroot "$(SDKROOT)"
-TARGET_ARCH    := -mmacosx-version-min=10.13 -arch x86_64
+TARGET_ARCH    := -mmacosx-version-min=10.15 -arch x86_64 -arch arm64
 
 # ----------------------------------------------------------
 
