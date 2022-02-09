@@ -77,7 +77,7 @@ inline void version()
 /*  */
 /* ---------------------------------------------------------------------- */
 
-inline bool is_status_byte(const unsigned char byte)
+inline bool is_status_byte(const unsigned char byte) noexcept
 {
     return (byte & static_cast<unsigned char>(0x80)) != 0;
 }
@@ -86,7 +86,7 @@ inline bool is_status_byte(const unsigned char byte)
 /*  */
 /* ---------------------------------------------------------------------- */
 
-inline bool is_data_byte(const unsigned char byte)
+inline bool is_data_byte(const unsigned char byte) noexcept
 {
     return !is_status_byte(byte);
 }
@@ -95,7 +95,7 @@ inline bool is_data_byte(const unsigned char byte)
 /*  */
 /* ---------------------------------------------------------------------- */
 
-inline std::size_t guess_message_size(const unsigned char status_byte)
+inline std::size_t guess_message_size(const unsigned char status_byte) noexcept
 {
     assert(is_status_byte(status_byte));
 
@@ -134,7 +134,7 @@ inline std::size_t guess_message_size(const unsigned char status_byte)
 /*  */
 /* ---------------------------------------------------------------------- */
 
-bool is_sysex(const std::vector<unsigned char> &bytes)
+bool is_sysex(const std::vector<unsigned char> &bytes) noexcept
 {
     if (bytes.size() < 2) {
         return false;
@@ -153,7 +153,7 @@ bool is_sysex(const std::vector<unsigned char> &bytes)
 /*  */
 /* ---------------------------------------------------------------------- */
 
-bool is_midi_message(const std::vector<unsigned char> &bytes)
+bool is_midi_message(const std::vector<unsigned char> &bytes) noexcept
 {
     if (bytes.empty()){
         return false;
