@@ -67,7 +67,7 @@ all: $(target-name)
 .SECONDEXPANSION:
 $(target-name): $$@.o $(lib-object-files)
 
-midiport.o: WARN_COMMON    += -Wno-unused-function
+midiport.o midirecv.o: WARN_COMMON    += -Wno-unused-function
 
 clean:
 	$(RM) $(target-name) $(object-files) $(depend-files) $(cov-files)
