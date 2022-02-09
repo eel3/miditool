@@ -58,7 +58,7 @@ inline void version()
 /*  */
 /* ---------------------------------------------------------------------- */
 
-inline void trap_exit(int signum) noexcept
+void trap_exit(int signum) noexcept
 {
     assert((signum == SIGINT) || (signum == SIGTERM));
     (void) signum;
